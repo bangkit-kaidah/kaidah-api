@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             SourceSeeder::class,
             StatusSeeder::class,
             SubjectSeeder::class,
-            DocumentSeeder::class
+            DocumentSeeder::class,
+            RoleSeeder::class
         ]);
     }
 }
