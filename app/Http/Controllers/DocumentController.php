@@ -12,10 +12,36 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $documents = Document::with(['status', 'subject', 'source', 'documentType'])->cursorPaginate(2);
-        return $documents;
+        $documents = Document::with(['status', 'subject', 'source', 'documentType'])->orderBy('tanggal_penetapan', 'desc');
+
+        $title = $request->input('title');
+        if(isset($title)) {
+            $documents->where('judul_dokumen', 'like', '%'.$title.'%');
+        }
+        
+        $document_type_id = $request->input('type');
+        if(isset($document_type_id)) {
+            $documents->where('document_type_id', '=', $document_type_id);
+        }
+
+        $source_id = $request->input('source');
+        if(isset($source_id)) {
+            $documents->where('source_id', '=', $source_id);
+        }
+
+        $status_id = $request->input('status');
+        if(isset($status_id)) {
+            $documents->where('status_id', '=', $status_id);
+        }
+
+        $subject_id = $request->input('subject');
+        if(isset($subject_id)) {
+            $documents->where('subject_id', '=', $subject_id);
+        }
+
+        return $documents->cursorPaginate(2);
     }
 
     /**
@@ -37,7 +63,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        //
+        return Document::find($document);
     }
 
     /**
