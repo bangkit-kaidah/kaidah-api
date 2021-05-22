@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\DocumentType;
+use App\Http\Controllers\Controller;
+use App\Models\Source;
 use Illuminate\Http\Request;
 
-class DocumentTypeController extends Controller
+class SourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class DocumentTypeController extends Controller
      */
     public function index()
     {
-        return DocumentType::all();
+        return Source::all();
     }
 
     /**
@@ -31,10 +32,10 @@ class DocumentTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DocumentType  $documentType
+     * @param  \App\Models\Source  $source
      * @return \Illuminate\Http\Response
      */
-    public function show(DocumentType $documentType)
+    public function show(Source $source)
     {
         //
     }
@@ -43,10 +44,10 @@ class DocumentTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DocumentType  $documentType
+     * @param  \App\Models\Source  $source
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DocumentType $documentType)
+    public function update(Request $request, Source $source)
     {
         //
     }
@@ -54,10 +55,10 @@ class DocumentTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DocumentType  $documentType
+     * @param  \App\Models\Source  $source
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DocumentType $documentType)
+    public function destroy(Source $source)
     {
         //
     }

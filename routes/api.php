@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\DocumentTypeController;
-use App\Http\Controllers\SourceController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\SubjectController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\DocumentController;
+use App\Http\Controllers\Api\V1\DocumentTypeController;
+use App\Http\Controllers\Api\V1\SourceController;
+use App\Http\Controllers\Api\V1\StatusController;
+use App\Http\Controllers\Api\V1\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,22 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['prefix' => '/v1'], function () {
+    Route::get('/documents', [DocumentController::class, 'index']);
+    Route::get('/documents/{document}', [DocumentController::class, 'show']);
+    Route::get('/subjects', [SubjectController::class, 'index']);
+    Route::get('/sources', [SourceController::class, 'index']);
+    Route::get('/document-types', [DocumentTypeController::class, 'index']);
+    Route::get('/status', [StatusController::class, 'index']);
 
-Route::get('/documents', [DocumentController::class, 'index']);
-Route::get('/documents/{document}', [DocumentController::class, 'show']);
-Route::get('/subjects', [SubjectController::class, 'index']);
-Route::get('/sources', [SourceController::class, 'index']);
-Route::get('/document-types', [DocumentTypeController::class, 'index']);
-Route::get('/status', [StatusController::class, 'index']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::group(['middleware' => ['auth:sanctum']], function() {
-    Route::get('/test', function(){
-        return response([
-            'status' => 'success'
-        ]);
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::post('/logout', [AuthController::class, 'logout']);
     });
-    Route::post('/logout', [AuthController::class, 'logout']);
 });
