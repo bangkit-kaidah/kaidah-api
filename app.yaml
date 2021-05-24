@@ -1,11 +1,14 @@
 runtime: php73
 
 env_variables:
-  ## Put production environment variables here.
+  APP_KEY: YOUR_APP_KEY
   APP_STORAGE: /tmp
-  DB_SOCKET: "/cloudsql/shaped-crawler-312912:us-central1:kaidah"
   VIEW_COMPILED_PATH: /tmp
   SESSION_DRIVER: cookie
+  DB_DATABASE: YOUR_DB_DATABASE
+  DB_USERNAME: YOUR_DB_USERNAME
+  DB_PASSWORD: YOUR_DB_PASSWORD
+  DB_SOCKET: "/cloudsql/shaped-crawler-312912:us-central1:kaidah"
 
 handlers:
 - url: /css
