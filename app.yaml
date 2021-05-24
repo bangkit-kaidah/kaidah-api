@@ -1,0 +1,26 @@
+runtime: php73
+
+env_variables:
+  ## Put production environment variables here.
+  APP_STORAGE: /tmp
+  DB_SOCKET: "/cloudsql/shaped-crawler-312912:us-central1:kaidah"
+  VIEW_COMPILED_PATH: /tmp
+  SESSION_DRIVER: cookie
+
+handlers:
+- url: /css
+  static_dir: public/css
+
+- url: /js
+  static_dir: public/js
+
+- url: /robots\.txt
+  static_files: public/robots.txt
+  upload: public/robots.txt
+
+- url: /favicon\.ico
+  static_files: public/favicon.ico
+  upload: public/favicon.ico
+
+- url: .*
+  script: auto
