@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\DocumentTypeController;
 use App\Http\Controllers\Api\V1\SourceController;
 use App\Http\Controllers\Api\V1\StatusController;
 use App\Http\Controllers\Api\V1\SubjectController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/user', [UserController::class, 'index']);
         Route::post('/logout', [AuthController::class, 'logout']);
     });
 });
