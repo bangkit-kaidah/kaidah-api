@@ -1,12 +1,23 @@
 steps:
-- name: "gcr.io/cloud-builders/gcloud"
-  entrypoint: bash
-  args: 
-  - "-c"
-  - |
-  sed -i '' "s#YOUR_APP_KEY#$(php artisan key:generate --show --no-ansi)#" app.yaml
-  sed -i '' "s#YOUR_DB_DATABASE#${_DB_DATABASE}#" app.yaml
-  sed -i '' "s#YOUR_DB_USERNAME#${_DB_USERNAME}#" app.yaml
-  sed -i '' "s#YOUR_DB_PASSWORD#${_DB_PASSWORD}#" app.yaml
-  gcloud app deploy  app.yaml
-timeout: "1600s"
+  - name: bash
+    args:
+      - cp
+      - .env.example
+      - .env
+  - name: gcr.io/$PROJECT_ID/composer
+    args:
+      - install
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - '-c'
+      - |-
+        sed -i "s/YOUR_APP_KEY/${_APP_KEY}/g" app.yaml
+        sed -i "s/YOUR_DB_DATABASE/${_DB_DATABASE}/g" app.yaml
+        sed -i "s/YOUR_DB_USERNAME/${_DB_USERNAME}/g" app.yaml
+        sed -i "s/YOUR_DB_PASSWORD/${_DB_PASSWORD}/g" app.yaml
+    entrypoint: bash
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - app
+      - deploy
+timeout: 1600s
