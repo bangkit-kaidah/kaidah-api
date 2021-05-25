@@ -50,7 +50,7 @@ class DocumentController extends Controller
             $documents->orderBy('tanggal_penetapan', 'desc');
         }
 
-        return $documents->cursorPaginate(2);
+        return $documents->cursorPaginate(5);
     }
 
     /**

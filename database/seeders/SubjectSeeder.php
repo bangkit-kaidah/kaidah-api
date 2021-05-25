@@ -19,6 +19,7 @@ class SubjectSeeder extends Seeder
             ['name' => 'Perpajakan'],
             ['name' => 'Wirausaha'],
             ['name' => 'Covid-19'],
+            ['name' => 'Lain-lain'],
         ]);
     }
 }

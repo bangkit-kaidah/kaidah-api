@@ -31,6 +31,19 @@ class SourceSeeder extends Seeder
                 'name' => 'JDIH Sekretariat Lembaga Negara Badan Pemeriksa Keuangan (BPK)',
                 'url' => 'http://jdih.bpk.go.id/'
             ],
+            [
+                'name' => 'JDIH Sekretariat Lembaga Negara Dewan Perwakilan Daerah (DPD)',
+                'url' => 'http://jdih.dpd.go.id/'
+            ],
+            [
+                'name' => 'JDIH Sekretariat Lembaga Negara Dewan Perwakilan Rakyat (DPR)',
+                'url' => 'http://dpr.go.id/jdih'
+            ],
+            [
+                'name' => 'JDIH Sekretariat Lembaga Negara Komisi Pemberantasan Korupsi (KPK)',
+                'url' => 'http://jdih.kpk.go.id/'
+            ],
+
         ]);
     }
 }
