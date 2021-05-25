@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Source;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SourceController extends Controller
 {
@@ -13,9 +14,15 @@ class SourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Source::all();
+        $user = auth('sanctum')->user();
+        if(isset($user)) {
+            return Source::with(['users' => function($q) use ($user) {
+                return $q->where('users.id', $user->id);
+            }])->get();
+        }
+        else return Source::all();
     }
 
     /**
@@ -61,5 +68,27 @@ class SourceController extends Controller
     public function destroy(Source $source)
     {
         //
+    }
+
+    public function follow(Request $request, Source $source)
+    {
+        $user = $request->user();
+        if ($source->users())
+        $source->users()->syncWithoutDetaching($user);
+
+        return [
+            'message' => 'Followed successfully.'
+        ];
+    }
+
+    public function unfollow(Request $request, Source $source)
+    {
+        $user = $request->user();
+        if ($source->users())
+        $source->users()->detach($user);
+
+        return [
+            'message' => 'Unfollowed successfully.'
+        ];
     }
 }

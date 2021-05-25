@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Source;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -69,5 +70,13 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function following(Request $request)
+    {
+        $user = $request->user();
+        return Source::whereHas('users', function($query) use ($user) {
+            return $query->where('users.id', $user->id);
+        })->get();
     }
 }
