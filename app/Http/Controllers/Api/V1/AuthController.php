@@ -24,9 +24,9 @@ class AuthController extends Controller
             'name' => $fields['name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
-            'phone' => $fields['phone'],
-            'address' => $fields['address'],
-            'info' => $fields['info'],
+            'phone' => $fields['phone'] ?? null,
+            'address' => $fields['address'] ?? null,
+            'info' => $fields['info'] ?? null,
         ]);
 
         $token = $user->createToken($fields['email'])->plainTextToken;
@@ -68,7 +68,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return [
             'message' => 'Successfully logged out.'
