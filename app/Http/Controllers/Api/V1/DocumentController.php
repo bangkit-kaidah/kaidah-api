@@ -15,9 +15,9 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        $documents = Document::with(['status', 'subject', 'source', 'documentType'])->orderBy('tanggal_penetapan', 'desc');
+        $documents = Document::with(['status', 'subject', 'source', 'documentType']);
 
-        $title = $request->input('title');
+        $title = $request->input('search');
         if(isset($title)) {
             $documents->where('judul_dokumen', 'like', '%'.$title.'%');
         }
@@ -42,7 +42,15 @@ class DocumentController extends Controller
             $documents->where('subject_id', '=', $subject_id);
         }
 
-        return $documents->cursorPaginate(2);
+        $order = $request->input('sort');
+        if(isset($order) && $order === 'oldest') {
+            $documents->orderBy('tanggal_penetapan', 'asc');
+        }
+        else {
+            $documents->orderBy('tanggal_penetapan', 'desc');
+        }
+
+        return $documents->cursorPaginate(5);
     }
 
     /**
