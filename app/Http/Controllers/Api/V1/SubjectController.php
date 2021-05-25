@@ -13,9 +13,13 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Subject::all();
+        $name = $request->input('search');
+        if(isset($name)) {
+            return Subject::where('name', 'like', '%'.$name.'%')->get();
+        }
+        else return Subject::all();
     }
 
     /**
