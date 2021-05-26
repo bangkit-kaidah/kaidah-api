@@ -17,12 +17,22 @@ class SourceController extends Controller
     public function index(Request $request)
     {
         $user = auth('sanctum')->user();
-        if(isset($user)) {
-            return Source::with(['users' => function($q) use ($user) {
+        if (isset($user)) {
+            $sources = Source::with(['users' => function ($q) use ($user) {
                 return $q->where('users.id', $user->id);
             }])->get();
-        }
-        else return Source::all();
+
+            foreach ($sources as $source) {
+                if (count($source->users) > 0) {
+                    $source->is_following = true;
+                } else {
+                    $source->is_following = false;
+                }
+                unset($source->users);
+            }
+
+            return $sources;
+        } else return Source::all();
     }
 
     /**
@@ -74,7 +84,7 @@ class SourceController extends Controller
     {
         $user = $request->user();
         if ($source->users())
-        $source->users()->syncWithoutDetaching($user);
+            $source->users()->syncWithoutDetaching($user);
 
         return [
             'message' => 'Followed successfully.'
@@ -85,7 +95,7 @@ class SourceController extends Controller
     {
         $user = $request->user();
         if ($source->users())
-        $source->users()->detach($user);
+            $source->users()->detach($user);
 
         return [
             'message' => 'Unfollowed successfully.'
