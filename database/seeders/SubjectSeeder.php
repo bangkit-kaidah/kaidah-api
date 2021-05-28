@@ -18,7 +18,13 @@ class SubjectSeeder extends Seeder
             ['name' => 'Akuntansi'],
             ['name' => 'Perpajakan'],
             ['name' => 'Wirausaha'],
+            ['name' => 'Infrastruktur'],
+            ['name' => 'Pegawai'],
+            ['name' => 'Laba'],
             ['name' => 'Covid-19'],
+            ['name' => 'Kewarganegaraan'],
+            ['name' => 'Pembangunan'],
+            ['name' => 'Investasi'],
             ['name' => 'Lain-lain'],
         ]);
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\SourceController;
 use App\Http\Controllers\Api\V1\StatusController;
 use App\Http\Controllers\Api\V1\SubjectController;
+use App\Http\Controllers\FeaturedSubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/sources', [SourceController::class, 'index']);
     Route::get('/document-types', [DocumentTypeController::class, 'index']);
     Route::get('/status', [StatusController::class, 'index']);
+    Route::get('/featured-subjects', [FeaturedSubjectController::class, 'index']);
 
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
