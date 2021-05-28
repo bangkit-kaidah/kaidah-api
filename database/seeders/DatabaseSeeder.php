@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             DocumentSeeder::class,
             RoleSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            FeaturedSubjectSeeder::class
         ]);
     }
 }
