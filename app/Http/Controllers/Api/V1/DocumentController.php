@@ -72,7 +72,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        return Document::find($document);
+        return Document::with(['status', 'subject', 'source', 'documentType'])->find($document);
     }
 
     /**
