@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('/home');
 });
 
 Auth::routes([
@@ -24,5 +24,7 @@ Auth::routes([
 
 Route::group(['middleware' => ['checkrole']], function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/anggota', [App\Http\Controllers\AnggotaController::class, 'index'])->name('anggota');
+    Route::post('/anggota', [App\Http\Controllers\AnggotaController::class, 'send'])->name('anggota.send');
 });
 

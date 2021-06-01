@@ -1,9 +1,4 @@
 steps:
-  - name: bash
-    args:
-      - cp
-      - .env.example
-      - .env
   - name: gcr.io/$PROJECT_ID/composer
     args:
       - install
@@ -15,6 +10,11 @@ steps:
         sed -i "s/YOUR_DB_DATABASE/${_DB_DATABASE}/g" app.yaml
         sed -i "s/YOUR_DB_USERNAME/${_DB_USERNAME}/g" app.yaml
         sed -i "s/YOUR_DB_PASSWORD/${_DB_PASSWORD}/g" app.yaml
+        sed -i "s/YOUR_MAIL_HOST/${_MAIL_HOST}/g" app.yaml
+        sed -i "s/YOUR_MAIL_USERNAME/${_MAIL_USERNAME}/g" app.yaml
+        sed -i "s/YOUR_MAIL_PASSWORD/${_MAIL_PASSWORD}/g" app.yaml
+        sed -i "s/YOUR_MAIL_FROM_ADDRESS/${_MAIL_FROM_ADDRESS}/g" app.yaml
+        sed -i "s/YOUR_MAIL_FROM_NAME/${_MAIL_FROM_NAME}/g" app.yaml
     entrypoint: bash
   - name: gcr.io/cloud-builders/gcloud
     args:
