@@ -17,10 +17,16 @@ class SourceController extends Controller
     public function index(Request $request)
     {
         $user = auth('sanctum')->user();
+        $name = $request->input('search');
         if (isset($user)) {
             $sources = Source::with(['users' => function ($q) use ($user) {
                 return $q->where('users.id', $user->id);
-            }])->get();
+            }]);
+
+            if (isset($name)) {
+                $sources->where('name', 'like', '%'.$name.'%');
+            }
+            $sources = $sources->get();
 
             foreach ($sources as $source) {
                 if (count($source->users) > 0) {
@@ -32,7 +38,12 @@ class SourceController extends Controller
             }
 
             return $sources;
-        } else return Source::all();
+        } else {
+            if (isset($name)) {
+                return Source::where('name', 'like', '%'.$name.'%')->get();
+            }
+            return Source::all();
+        }
     }
 
     /**
