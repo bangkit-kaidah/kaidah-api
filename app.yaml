@@ -1,6 +1,8 @@
 runtime: php73
 
 env_variables:
+  APP_NAME: Kaidah
+  APP_ENV: production
   APP_KEY: YOUR_APP_KEY
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
@@ -9,6 +11,14 @@ env_variables:
   DB_USERNAME: YOUR_DB_USERNAME
   DB_PASSWORD: YOUR_DB_PASSWORD
   DB_SOCKET: "/cloudsql/shaped-crawler-312912:us-central1:kaidah"
+  MAIL_MAILER: smtp
+  MAIL_HOST: YOUR_MAIL_HOST
+  MAIL_PORT: 587
+  MAIL_USERNAME: YOUR_MAIL_USERNAME
+  MAIL_PASSWORD: YOUR_MAIL_PASSWORD
+  MAIL_ENCRYPTION: tls
+  MAIL_FROM_ADDRESS: YOUR_MAIL_FROM_ADDRESS
+  MAIL_FROM_NAME: YOUR_MAIL_FROM_NAME
 
 handlers:
 - url: /css
