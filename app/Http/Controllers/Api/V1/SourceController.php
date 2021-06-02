@@ -94,6 +94,13 @@ class SourceController extends Controller
     public function follow(Request $request, Source $source)
     {
         $user = $request->user();
+
+        if(!$user->is_premium_member()) {
+            return response([
+                'message' => 'You are not a premium member!'
+            ], 401);
+        }
+        
         if ($source->users())
             $source->users()->syncWithoutDetaching($user);
 
@@ -105,6 +112,13 @@ class SourceController extends Controller
     public function unfollow(Request $request, Source $source)
     {
         $user = $request->user();
+
+        if(!$user->is_premium_member()) {
+            return response([
+                'message' => 'You are not a premium member!'
+            ], 401);
+        }
+
         if ($source->users())
             $source->users()->detach($user);
 

@@ -23,7 +23,8 @@ class User extends Authenticatable
         'password',
         'phone',
         'address',
-        'info'
+        'info',
+        'role_id'
     ];
 
     /**
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function is_premium_member()
+    {
+        return $this->role_id === 2;
     }
 }
