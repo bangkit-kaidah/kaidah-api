@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function is_premium_member()
+    {
+        return $this->role_id === 2;
+    }
 }
