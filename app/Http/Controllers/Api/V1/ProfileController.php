@@ -79,4 +79,15 @@ class ProfileController extends Controller
             return $query->where('users.id', $user->id);
         })->get();
     }
+
+    public function activate_premium(Request $request)
+    {
+        $user = $request->user();
+
+        $user->update([
+            'role_id' => 2
+        ]);
+
+        return $user;
+    }
 }
