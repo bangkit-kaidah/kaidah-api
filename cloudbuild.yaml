@@ -2,13 +2,12 @@ steps:
   - name: gcr.io/$PROJECT_ID/composer
     args:
       - install
-      - --optimze-autoloader
+      - --optimize-autoloader
       - --no-dev
   - name: gcr.io/$PROJECT_ID/composer
     args:
       - run
-      - optimize
-      - production
+      - optimize-production
   - name: gcr.io/cloud-builders/gcloud
     args:
       - '-c'
