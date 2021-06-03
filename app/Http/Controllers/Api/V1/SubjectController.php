@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
@@ -17,9 +18,16 @@ class SubjectController extends Controller
     {
         $name = $request->input('search');
         if(isset($name)) {
-            return Subject::where('name', 'like', '%'.$name.'%')->get();
+            return Subject::where('name', 'like', '%'.$name.'%')
+            ->join('documents', 'subjects.id', '=', 'documents.subject_id')
+            ->select('subjects.id', 'name', DB::raw('count(judul_dokumen) as total_documents'))
+            ->groupBy('subjects.id', 'name')
+            ->get();
         }
-        else return Subject::all();
+        else return Subject::join('documents', 'subjects.id', '=', 'documents.subject_id')
+        ->select('subjects.id', 'name', DB::raw('count(judul_dokumen) as total_documents'))
+        ->groupBy('subjects.id', 'name')
+        ->get();
     }
 
     /**
