@@ -1,4 +1,4 @@
-# Kaidah Api
+# Kaidah API
 
 ## Description
 A web API for displaying regulation documents along with other data such as list of documents, subjects, JDIH members, etc. This is a backend for the Kaidah android application for displaying regulations and such. Written using Laravel API.
