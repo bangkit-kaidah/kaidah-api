@@ -47,7 +47,10 @@
             "@php artisan key:generate --ansi"
         ],
         "optimize-production": [
-            "@php artisan optimize"
+            "@php artisan config:clear",
+            "@php artisan config:cache",
+            "@php artisan route:clear",
+            "@php artisan route:cache"
         ]
     },
     "extra": {
