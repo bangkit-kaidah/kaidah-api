@@ -12,7 +12,6 @@ steps:
         sed -i "s/YOUR_DB_DATABASE/${_DB_DATABASE}/g" app.yaml
         sed -i "s/YOUR_DB_USERNAME/${_DB_USERNAME}/g" app.yaml
         sed -i "s/YOUR_DB_PASSWORD/${_DB_PASSWORD}/g" app.yaml
-        sed -i "s/YOUR_DB_SOCKET/${_DB_SOCKET}/g" app.yaml
         sed -i "s/YOUR_MAIL_HOST/${_MAIL_HOST}/g" app.yaml
         sed -i "s/YOUR_MAIL_USERNAME/${_MAIL_USERNAME}/g" app.yaml
         sed -i "s/YOUR_MAIL_PASSWORD/${_MAIL_PASSWORD}/g" app.yaml
