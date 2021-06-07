@@ -24,6 +24,8 @@ steps:
     entrypoint: bash
   - name: gcr.io/cloud-builders/gcloud
     args:
+      - beta
       - app
       - deploy
+      - --no-cache
 timeout: 1600s
