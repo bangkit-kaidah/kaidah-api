@@ -91,9 +91,17 @@ class SourceController extends Controller
         //
     }
 
-    public function follow(Request $request, Source $source)
+    public function follow(Request $request)
     {
         $user = $request->user();
+        if(!isset($request->source_id))
+        {
+            return response([
+                'message' => 'source_id is required!'
+            ], 422);
+        }
+        $source_id = $request->source_id;
+        $source = Source::find($source_id);
 
         if(!$user->is_premium_member()) {
             return response([
@@ -109,10 +117,18 @@ class SourceController extends Controller
         ];
     }
 
-    public function unfollow(Request $request, Source $source)
+    public function unfollow(Request $request)
     {
         $user = $request->user();
-
+        if(!isset($request->source_id))
+        {
+            return response([
+                'message' => 'source_id is required!'
+            ], 422);
+        }
+        $source_id = $request->source_id;
+        $source = Source::find($source_id);
+        
         if(!$user->is_premium_member()) {
             return response([
                 'message' => 'You are not a premium member!'
