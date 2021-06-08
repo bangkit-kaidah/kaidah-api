@@ -34,8 +34,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::post('/sources/{source}/users', [SourceController::class, 'follow']);
-        Route::delete('/sources/{source}/users', [SourceController::class, 'unfollow']);
+        Route::post('/sources/users', [SourceController::class, 'follow']);
+        Route::delete('/sources/users', [SourceController::class, 'unfollow']);
         Route::get('/profile', [ProfileController::class, 'index']);
         Route::put('/profile', [ProfileController::class, 'update']);
         Route::post('/profile/activate', [ProfileController::class, 'activate_premium']);
