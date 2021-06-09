@@ -37,7 +37,7 @@ Route::group(['prefix' => '/v1'], function () {
         Route::post('/sources/users', [SourceController::class, 'follow']);
         Route::delete('/sources/users', [SourceController::class, 'unfollow']);
         Route::get('/profile', [ProfileController::class, 'index']);
-        Route::put('/profile', [ProfileController::class, 'update']);
+        Route::post('/profile', [ProfileController::class, 'update']);
         Route::post('/profile/activate', [ProfileController::class, 'activate_premium']);
         Route::get('/profile/sources', [ProfileController::class, 'following']);
         Route::post('/logout', [AuthController::class, 'logout']);
